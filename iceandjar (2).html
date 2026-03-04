@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ice & Jar — Proper food. Preserved naturally.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --beige:     #EDE8DF;
+    --beige-mid: #E2DBD0;
+    --cream:     #F5F1EB;
+    --coffee:    #2C1A0E;
+    --coffee-mid:#5C3D20;
+    --mustard:   #C8911A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--beige);
+    color: var(--coffee);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem 4rem;
+    background: var(--beige);
+    border-bottom: 1px solid rgba(44,26,14,0.1);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--coffee);
+    text-decoration: none;
+  }
+
+  .nav-right {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  /* HERO */
+  .hero {
+    padding-top: 6.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-text {
+    padding: 3.5rem 4rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .hero-text h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3.8rem, 6vw, 7rem);
+    line-height: 0.93;
+    color: var(--coffee);
+  }
+
+  .hero-text h1 em {
+    font-style: italic;
+    color: var(--coffee-mid);
+  }
+
+  .hero-sub {
+    text-align: right;
+    padding-bottom: 0.4rem;
+    max-width: 280px;
+  }
+
+  .mustard-rule {
+    display: block;
+    width: 28px;
+    height: 1.5px;
+    background: var(--mustard);
+    margin: 0 0 0.8rem auto;
+  }
+
+  .hero-sub p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--coffee-mid);
+    line-height: 1.65;
+    opacity: 0.8;
+  }
+
+  /* PHOTO GRID */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr 0.9fr;
+    height: 420px;
+    gap: 3px;
+    padding: 0 3px 3px;
+    flex: 1;
+  }
+
+  .photo-cell {
+    overflow: hidden;
+    position: relative;
+    background: var(--beige-mid);
+  }
+
+  .photo-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.88) brightness(0.96);
+    transition: transform 0.9s ease, filter 0.4s ease;
+    display: block;
+  }
+
+  .photo-cell:hover img {
+    transform: scale(1.05);
+    filter: saturate(1.0) brightness(1.0);
+  }
+
+  .photo-label {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 0.9rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(44,26,14,0.38);
+    padding: 0.25rem 0.55rem;
+    backdrop-filter: blur(4px);
+  }
+
+  /* DARK STRIP */
+  .strip {
+    background: var(--coffee);
+    color: var(--beige);
+    padding: 1.1rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .strip-items {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .strip-item {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .strip-item b {
+    color: var(--mustard);
+    font-weight: 400;
+    margin-right: 0.4rem;
+    opacity: 1;
+  }
+
+  .strip-right {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    opacity: 0.35;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 7rem 4rem;
+    gap: 0;
+    align-items: center;
+    background: var(--cream);
+  }
+
+  .about-left {
+    padding-right: 5rem;
+    border-right: 1px solid rgba(44,26,14,0.1);
+  }
+
+  .eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mustard);
+    display: block;
+    margin-bottom: 1.4rem;
+  }
+
+  .about-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 2.6vw, 2.8rem);
+    line-height: 1.15;
+    color: var(--coffee);
+    margin-bottom: 1.8rem;
+  }
+
+  .about-left p {
+    font-size: 0.86rem;
+    line-height: 1.95;
+    color: var(--coffee);
+    opacity: 0.68;
+    margin-bottom: 1.1rem;
+    max-width: 400px;
+  }
+
+  .about-right {
+    padding-left: 5rem;
+  }
+
+  .portrait {
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--beige-mid);
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8);
+    transition: transform 0.9s ease;
+  }
+
+  .portrait:hover img { transform: scale(1.03); }
+
+  .caption {
+    margin-top: 0.75rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.35;
+  }
+
+  /* PRINCIPLES */
+  .principles {
+    padding: 6rem 4rem;
+    background: var(--beige-mid);
+    border-top: 1px solid rgba(44,26,14,0.08);
+  }
+
+  .principles h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+    color: var(--coffee);
+    margin-bottom: 3.5rem;
+    line-height: 1.1;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(44,26,14,0.1);
+  }
+
+  .principle {
+    padding: 2.2rem 2.5rem 2.2rem 0;
+    border-right: 1px solid rgba(44,26,14,0.1);
+  }
+
+  .principle:last-child { border-right: none; }
+  .principle:not(:first-child) { padding-left: 2.5rem; }
+
+  .p-mark {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--mustard);
+    margin-bottom: 1.3rem;
+  }
+
+  .principle h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--coffee);
+    margin-bottom: 0.7rem;
+  }
+
+  .principle p {
+    font-size: 0.82rem;
+    line-height: 1.85;
+    opacity: 0.62;
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 7rem 4rem;
+    background: var(--beige);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7rem;
+    align-items: start;
+    border-top: 1px solid rgba(44,26,14,0.08);
+  }
+
+  .contact h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 3vw, 3.8rem);
+    line-height: 1.0;
+    color: var(--coffee);
+    margin: 1rem 0 1.6rem;
+  }
+
+  .contact > div > p {
+    font-size: 0.86rem;
+    line-height: 1.9;
+    opacity: 0.62;
+    max-width: 320px;
+    margin-bottom: 2.2rem;
+  }
+
+  .c-detail { margin-bottom: 1rem; }
+
+  .c-detail .lbl {
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mustard);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .c-detail a, .c-detail span {
+    font-size: 0.88rem;
+    color: var(--coffee);
+    text-decoration: none;
+    opacity: 0.78;
+  }
+
+  .c-detail a:hover { opacity: 1; text-decoration: underline; }
+
+  form { display: flex; flex-direction: column; gap: 1.4rem; }
+
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+
+  .field { display: flex; flex-direction: column; gap: 0.45rem; }
+
+  .field label {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.42;
+  }
+
+  .field input, .field select, .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(44,26,14,0.22);
+    padding: 0.6rem 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 300;
+    color: var(--coffee);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-bottom-color: var(--mustard);
+  }
+
+  .field textarea { resize: none; height: 75px; }
+
+  .btn {
+    background: var(--coffee);
+    color: var(--beige);
+    padding: 0.85rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    transition: background 0.2s;
+  }
+
+  .btn:hover { background: var(--mustard); }
+
+  #ok { display: none; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; opacity: 0.6; }
+
+  /* FOOTER */
+  footer {
+    background: var(--coffee);
+    padding: 2.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .f-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--beige);
+    text-decoration: none;
+    opacity: 0.85;
+  }
+
+  .f-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--beige);
+    opacity: 0.35;
+  }
+
+  .f-copy {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--beige);
+    opacity: 0.25;
+  }
+
+  /* FADE */
+  .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade.in { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    nav { padding: 1.3rem 1.5rem; }
+    .hero-text { flex-direction: column; padding: 3rem 1.5rem 1.5rem; gap: 1.5rem; align-items: flex-start; }
+    .hero-sub { text-align: left; }
+    .mustard-rule { margin: 0 0 0.8rem 0; }
+    .photo-grid { grid-template-columns: 1fr 1fr; height: auto; grid-template-rows: 200px 200px; }
+    .strip { padding: 1rem 1.5rem; }
+    .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; }
+    .about-left { padding-right: 0; border-right: none; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(44,26,14,0.1); }
+    .about-right { padding-left: 0; }
+    .principles { padding: 4rem 1.5rem; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .principle { border-right: none; border-bottom: 1px solid rgba(44,26,14,0.1); padding: 2rem 0; }
+    .principle:last-child { border-bottom: none; }
+    .principle:not(:first-child) { padding-left: 0; }
+    .contact { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .frow { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Ice&thinsp;&amp;&thinsp;Jar</a>
+  <span class="nav-right">London, UK &nbsp;·&nbsp; Est. 2025</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="fade">
+      <h1>Proper food.<br><em>Preserved</em><br>naturally.</h1>
+    </div>
+    <div class="hero-sub fade" style="transition-delay:0.15s">
+      <span class="mustard-rule"></span>
+      <p>Minimally processed British<br>ingredients for the people<br>and institutions that need them most.</p>
+    </div>
+  </div>
+
+  <div class="photo-grid">
+    <div class="photo-cell">
+      <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=900&q=85" alt="Heritage carrots">
+      <span class="photo-label">Heritage carrots</span>
+    </div>
+    <div class="photo-cell">
+      <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600&q=85" alt="Frozen raspberries">
+      <span class="photo-label">Frozen raspberries</span>
+    </div>
+    <div class="photo-cell">
+      <img src="https://images.unsplash.com/photo-1510627498534-cf7e9002facc?w=700&q=85" alt="Cauliflower">
+      <span class="photo-label">Cauliflower</span>
+    </div>
+    <div class="photo-cell">
+      <img src="https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=600&q=85" alt="Broad beans">
+      <span class="photo-label">British beans</span>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-items">
+    <span class="strip-item"><b>—</b>Natural preservation</span>
+    <span class="strip-item"><b>—</b>British farms</span>
+    <span class="strip-item"><b>—</b>Minimal processing</span>
+    <span class="strip-item"><b>—</b>Clean label</span>
+    <span class="strip-item"><b>—</b>Zero food waste</span>
+  </div>
+  <span class="strip-right">Ice & Jar · 2025</span>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left fade">
+    <span class="eyebrow">What we do</span>
+    <h2>Extending the life of British produce</h2>
+    <p>Ice & Jar was founded to solve a quiet crisis in the British food supply chain: vast quantities of high-quality, nutritious produce are lost every year — cosmetically imperfect, surplus to supermarket specification, or downgraded on the basis of assumptions that have never been tested.</p>
+    <p>We work with regenerative and organic British farms to transform that produce into minimally processed, naturally preserved ingredients — through freezing, fermenting, pickling and curing. No synthetic additives. Nothing unnecessary. Just proper food, handled properly.</p>
+    <p>Our products supply institutional catering markets: schools, NHS hospitals and workplace canteens — getting genuinely good British food onto the plates of the people who need it most.</p>
+  </div>
+  <div class="about-right fade" style="transition-delay:0.15s">
+    <div class="portrait">
+      <img src="https://images.unsplash.com/photo-1616690248004-8a4b3a7c3e2e?w=700&q=85" alt="British greens">
+    </div>
+    <p class="caption">British produce — nothing added</p>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <h2 class="fade">Three things<br>we believe in</h2>
+  <div class="principles-grid">
+    <div class="principle fade">
+      <span class="p-mark"></span>
+      <h3>Nature-friendly farming</h3>
+      <p>We partner with regenerative and organic farms that put soil health, biodiversity and long-term stewardship first. How the food is grown matters as much as how it is made.</p>
+    </div>
+    <div class="principle fade" style="transition-delay:0.1s">
+      <span class="p-mark"></span>
+      <h3>Minimal processing</h3>
+      <p>We use only natural methods — freezing, fermenting, pickling, curing — to extend shelf life. No synthetic additives, no flavour masking. The food tastes like itself.</p>
+    </div>
+    <div class="principle fade" style="transition-delay:0.2s">
+      <span class="p-mark"></span>
+      <h3>Institutional impact</h3>
+      <p>We focus on the markets that matter most: schools, hospitals and NHS catering — where better ingredients make the biggest difference to the most people.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="fade">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Let's talk<br>proper food</h2>
+    <p>Whether you're a farmer, an institutional buyer, a distributor or a funder — we'd love to hear from you.</p>
+    <div class="c-detail">
+      <span class="lbl">Email</span>
+      <a href="mailto:kate@iceandjar.co.uk">kate@iceandjar.co.uk</a>
+    </div>
+    <div class="c-detail">
+      <span class="lbl">Based in</span>
+      <span>London, United Kingdom</span>
+    </div>
+  </div>
+
+  <form class="fade" style="transition-delay:0.15s" onsubmit="sub(event)">
+    <div class="frow">
+      <div class="field">
+        <label>Name</label>
+        <input type="text" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label>Organisation</label>
+        <input type="text" placeholder="Farm / school / company">
+      </div>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" placeholder="your@email.com" required>
+    </div>
+    <div class="field">
+      <label>I am a...</label>
+      <select>
+        <option value="">Select</option>
+        <option>Farmer / grower</option>
+        <option>Institutional buyer (school / NHS / catering)</option>
+        <option>Distributor</option>
+        <option>Investor / funder</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Message</label>
+      <textarea placeholder="What are you looking for?" required></textarea>
+    </div>
+    <button type="submit" class="btn">Send message</button>
+    <p id="ok">Thank you — we'll be in touch shortly.</p>
+  </form>
+</section>
+
+<footer>
+  <a href="#" class="f-logo">Ice&thinsp;&amp;&thinsp;Jar</a>
+  <span class="f-tag">Proper food. Preserved naturally.</span>
+  <span class="f-copy">© 2026 Ice & Jar. London, UK.</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), {threshold:0.1});
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+  window.addEventListener('load', () => document.querySelectorAll('.hero .fade').forEach(el => el.classList.add('in')));
+  function sub(e) { e.preventDefault(); e.target.reset(); document.getElementById('ok').style.display='block'; }
+</script>
+</body>
+</html>
